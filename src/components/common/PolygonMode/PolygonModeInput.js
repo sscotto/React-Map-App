@@ -3,19 +3,45 @@ import * as mapActions from "../../../redux/actions/mapActions";
 import * as polygonsActions from "../../../redux//actions/polygonActions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Button } from "@material-ui/core";
+import { Button, Input } from "@material-ui/core";
+import { useState } from "react";
 
-const PolygonModeInput = ({ polygonMode, tooglePolygonMode, currentPolygon, addCurrentPolygonToPolygons }) => {
+const PolygonModeInput = ({
+  polygonMode,
+  tooglePolygonMode,
+  currentPolygon,
+  addCurrentPolygonToPolygons,
+}) => {
+  const [polygonNote, setPolygonNote] = useState("");
   useEffect(() => {
-    if (polygonMode == false &&  currentPolygon.length > 1) {
-      addCurrentPolygonToPolygons(currentPolygon);
+    if (polygonMode === false && currentPolygon.length > 1) {
+      addCurrentPolygonToPolygons(polygonNote);
+      setPolygonNote("");
     }
-  }, [polygonMode]);
+  }, [polygonMode, currentPolygon, addCurrentPolygonToPolygons, polygonNote]);
+
+  const handleChange = (e) => {
+    setPolygonNote(e.target.value);
+  };
 
   return (
-    <Button variant="contained" onClick={tooglePolygonMode}>
-     {!polygonMode ? "Create Polygon" : "Save Polygon"}
-    </Button>
+    <>
+      <Button
+        variant="contained"
+        color={polygonMode ? "secondary" : ""}
+        onClick={tooglePolygonMode}
+      >
+        {!polygonMode ? "Create Polygon" : "Save Polygon"}
+      </Button>
+      {polygonMode && (
+        <Input
+          placeholder="Polygon Tooltip Text"
+          color="secondary"
+          style={{ color: "white", marginLeft: "2px" }}
+          onChange={(e) => handleChange(e)}
+        />
+      )}
+    </>
   );
 };
 

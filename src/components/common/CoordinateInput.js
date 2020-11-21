@@ -4,23 +4,25 @@ import * as markerActions from "../../redux/actions/markerActions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Input } from "@material-ui/core";
 
 const CoordinateInput = ({ addMarker, center }) => {
   const noteRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [note, setNote] = useState(null);
 
   const set = () => {
     addMarker({
       latitude: center.latitude,
       longitude: center.longitude,
-      note: noteRef.current.value,
+      note: note,
     });
   };
 
   useEffect(() => {
-    if (center.latitude !== undefined && center.longitude != undefined) {
+    if (center.latitude !== undefined && center.longitude !== undefined) {
       setLatitude(center.latitude);
       setLongitude(center.longitude);
       setButtonDisable({
@@ -28,7 +30,7 @@ const CoordinateInput = ({ addMarker, center }) => {
         longitude: center.longitude,
       });
     }
-  }, [center.latitude, center.longitude ]);
+  }, [center.latitude, center.longitude]);
 
   const setButtonDisable = ({ latitude, longitude }) => {
     if (
@@ -51,25 +53,34 @@ const CoordinateInput = ({ addMarker, center }) => {
     setButtonDisable({ latitude, longitude: e.target.value });
   };
 
+  const changeNote = (e) => {
+    setNote(e.target.value);
+  };
+
   return (
     <div>
-      Latitude:
-      <input
-        type="text"
-        id="latitude"
-        name="latitude"
+      <Input
+        placeholder="Latitude"
+        color="secondary"
+        style={{ color: "white", marginLeft: "2px" }}
         onChange={changeLatitude}
         value={latitude}
-      ></input>{" "}
-      Longitude:
-      <input
-        type="text"
-        id="longitude"
-        name="longitude"
+      ></Input>{" "}
+      <Input
+        placeholder="Longitude"
+        color="secondary"
+        style={{ color: "white", marginLeft: "2px" }}
         onChange={changeLongitude}
         value={longitude}
-      ></input>{" "}
-      Note: <input ref={noteRef} type="text" id="note" name="longitude"></input>{" "}
+      ></Input>{" "}
+      <Input
+        ref={noteRef}
+        placeholder="Note"
+        color="secondary"
+        style={{ color: "white", marginLeft: "2px" }}
+        onChange={changeNote}
+        value={note}
+      ></Input>{" "}
       <Button variant="contained" onClick={set} disabled={disabled}>
         Add Mark
       </Button>{" "}
