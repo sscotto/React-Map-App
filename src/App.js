@@ -2,7 +2,7 @@ import "./App.css";
 import { Grid } from "@material-ui/core";
 import MarkerList from "./components/mapView/MarkerList";
 import CustomMap from "./components/mapView/CustomMap";
-import { Header } from "./components/common/Header";
+import Header from "./components/common/Header";
 
 function App() {
   return (

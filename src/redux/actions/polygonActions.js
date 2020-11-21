@@ -4,9 +4,9 @@ export function addPolygonPoint(point) {
   return { type: polygonActions.ADD_POLYGON_POINT, point };
 }
 
-export function addCurrentPolygonToPolygons(currentPolygon) {
+export function addCurrentPolygonToPolygons(note) {
   return {
     type: polygonActions.ADD_CURRENT_POLYGON_TO_POLYGONS,
-    currentPolygon,
+    note,
   };
 }
