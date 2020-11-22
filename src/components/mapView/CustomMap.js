@@ -1,9 +1,10 @@
 import React from "react";
 import { MapContainer, Marker, Polygon, Popup, TileLayer } from "react-leaflet";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import ComponentEventsHandler from "./ComponentEventsHandler";
 import { Tooltip } from "react-leaflet";
+import { IconBuilder } from "../common/Icons/IconBuilder";
+import MapMarkersList from "./MapMarkersList";
 
 const redOptions = { color: "red" };
 const purpleOptions = { color: "purple" };
@@ -23,14 +24,7 @@ const CustomMap = ({
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {typeof markers !== undefined &&
-        markers.map((p) => {
-          return (
-            <Marker position={[p.latitude, p.longitude]}>
-              <Popup>{p.note}</Popup>
-            </Marker>
-          );
-        })}
+      <MapMarkersList></MapMarkersList>
       {polygons.length > 0 &&
         polygons.map((p) => {
           return (

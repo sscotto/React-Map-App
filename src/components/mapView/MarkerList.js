@@ -1,17 +1,10 @@
 import React from "react";
-import  CustomChip  from "./CustomChip";
+import CustomChip from "./CustomChip";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
-const MarkerList = ({
-  markers,
-}) => {
+const MarkerList = ({ markers }) => {
   return markers.map((p) => {
-    return (
-      <CustomChip
-        {...p}
-      ></CustomChip>
-    );
+    return <CustomChip {...p}></CustomChip>;
   });
 };
 

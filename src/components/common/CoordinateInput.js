@@ -5,8 +5,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Input } from "@material-ui/core";
+import IconSelector from "./Icons/IconSelector";
 
-const CoordinateInput = ({ addMarker, center }) => {
+const CoordinateInput = ({ addMarker, center, icon }) => {
   const noteRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const [latitude, setLatitude] = useState(null);
@@ -18,6 +19,7 @@ const CoordinateInput = ({ addMarker, center }) => {
       latitude: center.latitude,
       longitude: center.longitude,
       note: note,
+      icon,
     });
   };
 
@@ -81,6 +83,7 @@ const CoordinateInput = ({ addMarker, center }) => {
         onChange={changeNote}
         value={note}
       ></Input>{" "}
+      <IconSelector></IconSelector>{" "}
       <Button variant="contained" onClick={set} disabled={disabled}>
         Add Mark
       </Button>{" "}
@@ -92,6 +95,7 @@ function mapStateToProps(state) {
   return {
     markers: state.markers,
     center: state.mapSettings.centerPosition,
+    icon: state.mapSettings.selectedIcon,
   };
 }
 
