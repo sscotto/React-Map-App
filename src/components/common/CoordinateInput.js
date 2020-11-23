@@ -5,7 +5,10 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Input } from "@material-ui/core";
-import IconSelector from "./Icons/IconSelector";
+import SelectIconButton from "./Icons/SelectIconButton";
+import IconsDialog from "./Icons/Dialog/IconsDialog";
+import { useModal } from "../customHooks/useModal";
+import ButtonDialog from "./ButtonDialog";
 
 const CoordinateInput = ({ addMarker, center, icon }) => {
   const noteRef = useRef(null);
@@ -13,6 +16,7 @@ const CoordinateInput = ({ addMarker, center, icon }) => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [note, setNote] = useState(null);
+  const { open, handleClickOpen, handleClose } = useModal();
 
   const set = () => {
     addMarker({
@@ -83,7 +87,10 @@ const CoordinateInput = ({ addMarker, center, icon }) => {
         onChange={changeNote}
         value={note}
       ></Input>{" "}
-      <IconSelector></IconSelector>{" "}
+      <ButtonDialog
+        ButtonComponent={<SelectIconButton handleClickOpen={handleClickOpen} />}
+        Dialog={<IconsDialog open={open} onClose={handleClose} />}
+      ></ButtonDialog>{" "}
       <Button variant="contained" onClick={set} disabled={disabled}>
         Add Mark
       </Button>{" "}

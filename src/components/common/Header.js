@@ -3,17 +3,19 @@ import React from "react";
 import CoordinateInput from "./CoordinateInput";
 import PolygonModeInput from "./PolygonMode/PolygonModeInput";
 import { connect } from "react-redux";
+import { SaveButton } from "./saveMapComponents/SaveButton";
+import { LoadButton } from "./loadMapComponents/LoadButton";
 
 const Header = ({ polygonMode }) => {
   return (
     <AppBar position="static">
       <Toolbar>
         <Grid container>
-          <Grid item xs={polygonMode ? 12 : 2}>
+          <Grid item xs={polygonMode ? 10 : 2}>
             <PolygonModeInput />
           </Grid>
 
-          <Grid item xs={10}>
+          <Grid item xs={polygonMode ? 0 : 8}>
             <Fade
               in={!polygonMode}
               timeout={500}
@@ -23,6 +25,9 @@ const Header = ({ polygonMode }) => {
                 <CoordinateInput />
               </div>
             </Fade>
+          </Grid>
+          <Grid item xs={2}>
+            <SaveButton></SaveButton> <LoadButton></LoadButton>
           </Grid>
         </Grid>
       </Toolbar>

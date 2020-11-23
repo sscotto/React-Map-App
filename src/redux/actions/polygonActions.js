@@ -10,3 +10,7 @@ export function addCurrentPolygonToPolygons(note) {
     note,
   };
 }
+
+export function loadPolygons(polygons) {
+  return { type: polygonActions.LOAD_POLYGONS, polygons };
+}

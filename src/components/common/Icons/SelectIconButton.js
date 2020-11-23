@@ -3,7 +3,7 @@ import React from "react";
 import { icons } from "./IconsArray";
 import { connect } from "react-redux";
 
-const SelectIconButton = ({ handleClickOpen, selectedIcon }) => {
+function SelectIconButton({ handleClickOpen, selectedIcon }) {
   return (
     <>
       <Button onClick={handleClickOpen} variant="contained">
@@ -22,7 +22,7 @@ const SelectIconButton = ({ handleClickOpen, selectedIcon }) => {
       </Button>
     </>
   );
-};
+}
 
 function mapStateToProps(state) {
   return {

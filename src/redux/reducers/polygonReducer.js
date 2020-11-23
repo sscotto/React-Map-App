@@ -15,6 +15,11 @@ export default function polygonReducer(state = [], action) {
         ],
         currentPolygon: [],
       };
+    case polygonActions.LOAD_POLYGONS:
+      return {
+        currentPolygon: [...state.currentPolygon],
+        polygons: [...action.polygons],
+      };
     default:
       return state;
   }
